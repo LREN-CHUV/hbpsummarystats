@@ -10,7 +10,7 @@ test_that("Box statistics are correct at the node level", {
 
     y <- matrix(rnorm(N,mean=2,sd=1), N, 1)
     
-    stats <- BoxStats_node(y)
+    stats <- BoxStats_Node(y)
     print(stats)
 
     min <- stats[["min"]]

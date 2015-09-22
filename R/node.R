@@ -9,7 +9,7 @@
 #'         max : Maximum value in the vector 
 #' @keywords boxplot
 #' @export
-BoxStats_node <- function(y) {
+BoxStats_Node <- function(y) {
     
     # Lester Melie-Garcia LREN, CHUV.  Lausanne, September 11th, 2015
     
