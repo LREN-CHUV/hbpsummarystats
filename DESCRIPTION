@@ -1,4 +1,4 @@
-Package: hbpboxstat
+Package: hbpboxstats
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
 Authors@R: person("Lester", "Melie-Garcia", email = "Lester.Melie-Garcia@chuv.ch", role = c("aut", "cre"))
