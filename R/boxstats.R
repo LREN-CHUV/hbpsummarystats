@@ -7,23 +7,25 @@
 #'         median : Median value
 #'         q3 :  Third quartile
 #'         max : Maximum value in the vector 
+#'         mean : Mean value
+#'         std : Standard deviation
 #' @keywords boxplot
 #' @export
-BoxStats_Node <- function(y) {
-    
+boxstats <- function(y) {
+
     # Lester Melie-Garcia LREN, CHUV.  Lausanne, September 11th, 2015
-    
-    ymean <- mean(y)
-    ymedian <- median(y)
-    ystd <- sd(y)
-    ymin <- min(y)
-    ymax <- max(y)
-    yq <- quantile(y)
-    q1 <- yq[[2]]
-    q3 <- yq[[4]]
-    
-    rout <- list(ymin, q1, ymedian, q3, ymax)
-    names(rout) <- c("min", "q1", "median", "q3", "max")
-    
+
+    ymean <- mean(y);
+    ymedian <- median(y);
+    ystd <- sd(y);
+    ymin <- min(y);
+    ymax <- max(y);
+    yq <- quantile(y);
+    q1 <- yq[[2]];
+    q3 <- yq[[4]];
+
+    rout <- list(ymin, q1, ymedian, q3, ymax, ymean, ystd);
+    names(rout) <- c("min", "q1", "median", "q3", "max", "mean", "std");
+
     return(rout)
-} 
+}
