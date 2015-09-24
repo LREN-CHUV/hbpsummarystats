@@ -1,5 +1,4 @@
 #!/bin/bash
-# We need X11 for the graph to display.
 
 WORK_DIR="$(pwd)"
 shift

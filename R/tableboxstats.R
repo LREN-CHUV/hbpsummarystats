@@ -1,8 +1,8 @@
-#' Computes the minimum, maximum, media, quantiles and other parameters to be used for plotting. 
+#' Computes the minimum, maximum, media, quantiles and other parameters to be used for plotting.
 #' Only those variables that are numeric will be return with the previous statistics.
 #'
 #' @param ytable Data table type data.frame.
-#' @param ycols2plot Names of the variables in the Table that will be plotted. 
+#' @param ycols2plot Names of the variables in the Table that will be plotted.
 #' @return fstats : Statistic necessary for plotting: minimum, maximum, media, quantiles. This is data.frame type.
 #' @keywords boxplot
 #' @export
@@ -21,9 +21,8 @@ tableboxstats <- function(ytable, ycols2plot) {
 
   if (length(inds) == 1) {
     ysubset <- ytable;
-  }
-  else {
-    ysubset <- ytable[,inds];
+  } else {
+      ysubset <- ytable[,inds];
   }
 
   # To know the data type of each column in the table.
@@ -46,8 +45,7 @@ tableboxstats <- function(ytable, ycols2plot) {
   fstats <- data.frame(fstats);
   if (length(inds) == 1) {
     names(fstats) <- colnames(ytable);
-  }
-  else {
+  } else {
     names(fstats) <- colnames(yfinal);
   }
 
