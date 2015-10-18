@@ -49,10 +49,7 @@ tableboxstats <- function(ytable, ycols2plot) {
     names(fstats) <- colnames(yfinal);
   }
 
-  statnames <- NULL;
-  statnames[1] <- "min"; statnames[2] <- "q1"; statnames[3] <- "median";
-  statnames[4] <- "q3" ; statnames[5] <- "max";
-  row.names(fstats) <- statnames;
+  row.names(fstats) <- c("min", "q1", "median", "q3", "max");
 
   return(fstats)
 }
