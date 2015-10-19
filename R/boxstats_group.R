@@ -17,15 +17,23 @@ boxstats_group <- function(partialStats) {
 	tcount <- sum(partialStats[["count"]])
     tmin   <- min(partialStats[["min"]]);
     tmax   <- max(partialStats[["max"]]);
+    tmean <- tsum / tcount;
+    # Assuming non overlapping populations
+    nx <- partialStats[["count"]]
+    stdx <- partialStats[["std"]]
+    mx <- partialStats[["mean"]]
+    nxy <- outer(nx, nx, "*")
+    diffxy <- outer(mx, mx, "-")
+    nddxy <- nxy * diffxy * diffxy
+    tstd <- sqrt(sum(nx * stdx * stdx) / tcount + sum(nddxy[lower.tri(nddxy)]) / tcount / tcount);
+    # TODO: rubbish maths by LC
+    # To replace by a T-digest implementation in R
+    # See https://github.com/tdunning/t-digest
+    tmedian <- mean(partialStats[["median"]]);
+    q1 <- mean(partialStats[["q1"]]);
+    q3 <- mean(partialStats[["q3"]]);
 
-    ymean <- mean(y);
-    ymedian <- median(y);
-    ystd <- sd(y);
-    yq <- quantile(y);
-    q1 <- yq[[2]];
-    q3 <- yq[[4]];
-
-    rout <- list(tmin, q1, ymedian, q3, tmax, ymean, ystd, tsum, tcount);
+    rout <- list(tmin, q1, tmedian, q3, tmax, tmean, tstd, tsum, tcount);
     names(rout) <- c("min", "q1", "median", "q3", "max", "mean", "std", "sum", "count");
 
     return(rout)
