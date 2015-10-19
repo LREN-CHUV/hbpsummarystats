@@ -9,6 +9,8 @@
 #'         max : Maximum value in the vector
 #'         mean : Mean value
 #'         std : Standard deviation
+#'         sum: Sum of all values
+#'         count: Number of values N
 #' @keywords boxplot
 #' @export
 boxstats_group <- function(partialStats) {
@@ -17,15 +19,15 @@ boxstats_group <- function(partialStats) {
 	tcount <- sum(partialStats[["count"]])
     tmin   <- min(partialStats[["min"]]);
     tmax   <- max(partialStats[["max"]]);
-    tmean <- tsum / tcount;
+    tmean  <- tsum / tcount;
     # Assuming non overlapping populations
-    nx <- partialStats[["count"]]
-    stdx <- partialStats[["std"]]
-    mx <- partialStats[["mean"]]
-    nxy <- outer(nx, nx, "*")
+    nx     <- partialStats[["count"]]
+    stdx   <- partialStats[["std"]]
+    mx     <- partialStats[["mean"]]
+    nxy    <- outer(nx, nx, "*")
     diffxy <- outer(mx, mx, "-")
-    nddxy <- nxy * diffxy * diffxy
-    tstd <- sqrt(sum(nx * stdx * stdx) / tcount + sum(nddxy[lower.tri(nddxy)]) / tcount / tcount);
+    nddxy  <- nxy * diffxy * diffxy
+    tstd   <- sqrt(sum(nx * stdx * stdx) / tcount + sum(nddxy[lower.tri(nddxy)]) / tcount / tcount);
     # TODO: rubbish maths by LC
     # To replace by a T-digest implementation in R
     # See https://github.com/tdunning/t-digest
