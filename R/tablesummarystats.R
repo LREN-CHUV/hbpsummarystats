@@ -4,7 +4,7 @@
 #' @param ytable Data table type data.frame.
 #' @param ycols2plot Names of the variables in the Table that will be plotted.
 #' @return fstats : Statistic necessary for plotting: minimum, maximum, media, quantiles. This is data.frame type.
-#' @keywords summarystats
+#' @keywords summarystats table tablesummarystats
 #' @export
 tablesummarystats <- function(ytable, ycols2plot) {
 

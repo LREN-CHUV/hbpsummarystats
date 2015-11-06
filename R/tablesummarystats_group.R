@@ -1,7 +1,7 @@
 
-#' Computes the summary statistics used to display the summaryplot for a vector of values.
+#' Computes the statitics used to display the summaryplot for a vector of values.
 #'
-#' @param partialStats the results of summarystats function applied to multiple datasets and packed in one dataframe.
+#' @param partialStats the results of summarystat function applied to multiple datasets and packed in one dataframe.
 #' @return min : Minimum value in the vector
 #'         q1 :  First quartile
 #'         median : Median value
@@ -11,9 +11,9 @@
 #'         std : Standard deviation
 #'         sum: Sum of all values
 #'         count: Number of values N
-#' @keywords summarystats federation
+#' @keywords summarystats table tablesummarystats federation
 #' @export
-summarystats_group <- function(partialStats) {
+tablesummarystats_group <- function(partialStats) {
 
 	tsum   <- sum(partialStats[["sum"]])
 	tcount <- sum(partialStats[["count"]])
