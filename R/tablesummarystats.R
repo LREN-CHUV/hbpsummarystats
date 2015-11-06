@@ -4,9 +4,9 @@
 #' @param ytable Data table type data.frame.
 #' @param ycols2plot Names of the variables in the Table that will be plotted.
 #' @return fstats : Statistic necessary for plotting: minimum, maximum, media, quantiles. This is data.frame type.
-#' @keywords boxplot
+#' @keywords summarystats
 #' @export
-tableboxstats <- function(ytable, ycols2plot) {
+tablesummarystats <- function(ytable, ycols2plot) {
 
   # Lester Melie-Garcia
   # LREN, CHUV.

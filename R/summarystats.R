@@ -1,5 +1,5 @@
 
-#' Computes the statistics used to display the boxplot for a vector of values.
+#' Computes the summary statistics used to display the boxplot for a vector of values.
 #'
 #' @param y Column vector of size N x 1
 #' @return min : Minimum value in the vector
@@ -11,9 +11,9 @@
 #'         std : Standard deviation
 #'         sum: Sum of all values
 #'         count: Number of values N
-#' @keywords boxplot
+#' @keywords summarystats
 #' @export
-boxstats <- function(y) {
+summarystats <- function(y) {
 
     # Lester Melie-Garcia LREN, CHUV.  Lausanne, September 11th, 2015
 

@@ -1,29 +1,29 @@
 context("Federation")
 
-library(hbpboxstats)
+library(hbpsummarystats)
 
-test_that("Box statistics are correct at the federation level", {
+test_that("Summary statistics are correct at the federation level", {
 
     set.seed(100)
 
     N1 <- 20
     y1 <- matrix(rnorm(N1,mean=2,sd=1), N1, 1)
 
-    stats1 <- boxstats(y1)
+    stats1 <- summarystats(y1)
 
     set.seed(200)
 
     N2 <- 10
     y2 <- matrix(rnorm(N2,mean=4,sd=0.5), N2, 1)
 
-    stats2 <- boxstats(y2)
+    stats2 <- summarystats(y2)
 
-    stats_check <- boxstats(c(y1,y2))
+    stats_check <- summarystats(c(y1,y2))
 
     intermediateStats <- data.frame(stats1);
     intermediateStats <- rbind(intermediateStats, stats2);
 
-    stats_fed <- boxstats_group(intermediateStats)
+    stats_fed <- summarystats_group(intermediateStats)
 
     expect_equal(stats_fed["min"], stats_check["min"], tolerance = 1e-6)
     # TODO: quartiles are far from good enough

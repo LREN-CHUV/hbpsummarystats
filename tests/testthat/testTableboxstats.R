@@ -1,7 +1,7 @@
 context("Node")
 
-library(hbpboxstats)
+library(hbpsummarystats)
 
-test_that("Table box statistics are correct at the node level", {
+test_that("Table summary statistics are correct at the node level", {
 
 }

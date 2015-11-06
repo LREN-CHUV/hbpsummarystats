@@ -1,4 +1,4 @@
 library(testthat)
-library(hbpboxstats)
+library(hbpsummarystats)
 
-test_check("hbpboxstats")
+test_check("hbpsummarystats")

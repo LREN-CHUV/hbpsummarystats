@@ -1,15 +1,15 @@
 context("Node")
 
-library(hbpboxstats)
+library(hbpsummarystats)
 
-test_that("Box statistics are correct at the node level", {
+test_that("Summary statistics are correct at the node level", {
 
     set.seed(100)
 
     N <- 20
     y <- matrix(rnorm(N,mean=2,sd=1), N, 1)
 
-    stats <- boxstats(y)
+    stats <- summarystats(y)
 
     min <- stats[["min"]]
     q1 <- stats[["q1"]]
@@ -30,14 +30,14 @@ test_that("Box statistics are correct at the node level", {
     expect_equal(count, N)
 })
 
-test_that("Box statistics are correct at the node level, using another distribution", {
+test_that("Summary statistics are correct at the node level, using another distribution", {
 
     set.seed(200)
 
     N <- 10
     y <- matrix(rnorm(N,mean=4,sd=0.5), N, 1)
 
-    stats <- boxstats(y)
+    stats <- summarystats(y)
 
     min <- stats[["min"]]
     q1 <- stats[["q1"]]
