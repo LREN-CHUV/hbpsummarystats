@@ -15,28 +15,30 @@
 #' @export
 summarystats_group <- function(partialStats) {
 
-	tsum   <- sum(partialStats[["sum"]])
-	tcount <- sum(partialStats[["count"]])
-    tmin   <- min(partialStats[["min"]]);
-    tmax   <- max(partialStats[["max"]]);
+    partialStats <- as.data.frame(partialStats);
+    tStats <- as.data.frame(t(partialStats));
+
+	tsum   <- sum(unlist(tStats$sum));
+	tcount <- sum(unlist(tStats$count));
+    tmin   <- min(unlist(tStats$min));
+    tmax   <- max(unlist(tStats$max));
     tmean  <- tsum / tcount;
     # Assuming non overlapping populations
-    nx     <- partialStats[["count"]]
-    stdx   <- partialStats[["std"]]
-    mx     <- partialStats[["mean"]]
-    nxy    <- outer(nx, nx, "*")
-    diffxy <- outer(mx, mx, "-")
-    nddxy  <- nxy * diffxy * diffxy
+    nx     <- unlist(tStats$count);
+    stdx   <- unlist(tStats$std);
+    mx     <- unlist(tStats$mean);
+    nxy    <- outer(nx, nx, "*");
+    diffxy <- outer(mx, mx, "-");
+    nddxy  <- nxy * diffxy * diffxy;
     tstd   <- sqrt(sum(nx * stdx * stdx) / tcount + sum(nddxy[lower.tri(nddxy)]) / tcount / tcount);
     # TODO: rubbish maths by LC
     # To replace by a T-digest implementation in R
     # See https://github.com/tdunning/t-digest
-    tmedian <- mean(partialStats[["median"]]);
-    q1 <- mean(partialStats[["q1"]]);
-    q3 <- mean(partialStats[["q3"]]);
+    tmedian <- mean(unlist(tStats$median));
+    q1 <- mean(unlist(tStats$q1));
+    q3 <- mean(unlist(tStats$q3));
 
-    rout <- list(tmin, q1, tmedian, q3, tmax, tmean, tstd, tsum, tcount);
-    names(rout) <- c("min", "q1", "median", "q3", "max", "mean", "std", "sum", "count");
+    rout <- list(min=tmin, q1=q1, median=tmedian, q3=q3, max=tmax, mean=tmean, std=tstd, sum=tsum, count=tcount);
 
     return(rout)
 }

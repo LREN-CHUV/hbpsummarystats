@@ -13,43 +13,29 @@ tablesummarystats <- function(ytable, ycols2plot) {
   # Lausanne, September 22nd, 2015
 
   yvarnames <- colnames(ytable);
-  nc <- length(ycols2plot);
-  inds <- NULL;
-  for (i in 1:nc) {
-    inds[i] <- which(yvarnames == ycols2plot[i]);
-  }
-
-  if (length(inds) == 1) {
-    ysubset <- ytable;
+  inds <- which(yvarnames %in% ycols2plot);
+  ysubset <- ytable[,inds];
+  if (length(ycols2plot) == 1) {
+    yfinal <- cbind(ysubset)
+    colnames(yfinal) <- ycols2plot
   } else {
-      ysubset <- ytable[,inds];
+  
+    # To know the data type of each column in the table.
+    ydatatype <- sapply(ysubset, class);
+    indst <- which(ydatatype == "integer" | ydatatype == "numeric");
+    yfinal <- ysubset[,indst];
+    if (length(ycols2plot) == 1) {
+      yfinal <- cbind(yfinal)
+      colnames(yfinal) <- ycols2plot
+    }
   }
 
-  # To know the data type of each column in the table.
-  ydatatype <- sapply(ysubset, class);
-  indst <- which(ydatatype == "integer" | ydatatype == "numeric");
-
-  yfinal <- ysubset[,indst];
-  M <- length(indst);
-  fstats <- matrix(0, 5, M);
-  ynum <- data.matrix(yfinal);
-  for (i in 1:M){
-    fstats[1,i] <- min(ynum[,i]);
-    yq <- quantile(ynum[,i]); q1 <- yq[[2]]; q3 <- yq[[4]];
-    fstats[2,i] <- q1;
-    fstats[3,i] <- median(ynum[,i]);
-    fstats[4,i] <- q3;
-    fstats[5,i] <- max(ynum[,i]);
-  }
-
-  fstats <- data.frame(fstats);
-  if (length(inds) == 1) {
-    names(fstats) <- colnames(ytable);
+  if (ncol(yfinal) == 1) {
+    fstats <- cbind(summarystats(yfinal));
+    colnames(fstats) <- ycols2plot
   } else {
-    names(fstats) <- colnames(yfinal);
+    fstats <- sapply(yfinal, summarystats);
   }
-
-  row.names(fstats) <- c("min", "q1", "median", "q3", "max");
 
   return(fstats)
 }

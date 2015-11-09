@@ -1,7 +1,7 @@
 
 #' Computes the statitics used to display the summaryplot for a vector of values.
 #'
-#' @param partialStats the results of summarystat function applied to multiple datasets and packed in one dataframe.
+#' @param listStats the results of tablesummarystat function applied to multiple datasets and packed in one list.
 #' @return min : Minimum value in the vector
 #'         q1 :  First quartile
 #'         median : Median value
@@ -13,30 +13,17 @@
 #'         count: Number of values N
 #' @keywords summarystats table tablesummarystats federation
 #' @export
-tablesummarystats_group <- function(partialStats) {
+tablesummarystats_group <- function(listStats) {
 
-	tsum   <- sum(partialStats[["sum"]])
-	tcount <- sum(partialStats[["count"]])
-    tmin   <- min(partialStats[["min"]]);
-    tmax   <- max(partialStats[["max"]]);
-    tmean  <- tsum / tcount;
-    # Assuming non overlapping populations
-    nx     <- partialStats[["count"]]
-    stdx   <- partialStats[["std"]]
-    mx     <- partialStats[["mean"]]
-    nxy    <- outer(nx, nx, "*")
-    diffxy <- outer(mx, mx, "-")
-    nddxy  <- nxy * diffxy * diffxy
-    tstd   <- sqrt(sum(nx * stdx * stdx) / tcount + sum(nddxy[lower.tri(nddxy)]) / tcount / tcount);
-    # TODO: rubbish maths by LC
-    # To replace by a T-digest implementation in R
-    # See https://github.com/tdunning/t-digest
-    tmedian <- mean(partialStats[["median"]]);
-    q1 <- mean(partialStats[["q1"]]);
-    q3 <- mean(partialStats[["q3"]]);
+	groups <- names(as.data.frame(listStats[1]));
+	regrouped <- list();
 
-    rout <- list(tmin, q1, tmedian, q3, tmax, tmean, tstd, tsum, tcount);
-    names(rout) <- c("min", "q1", "median", "q3", "max", "mean", "std", "sum", "count");
+	for (g in groups) {
+		ext <- sapply(listStats, function(df) df[,g]);
+		regrouped <- cbind(regrouped, summarystats_group(ext));
+	}
 
-    return(rout)
+	colnames(regrouped) <- groups;
+
+    return(regrouped)
 }
