@@ -1,6 +1,6 @@
-context("Node")
+context("Node");
 
-library(hbpsummarystats)
+library(hbpsummarystats);
 
 test_that("Summary statistics are correct at the node level", {
 
@@ -20,13 +20,13 @@ test_that("Summary statistics are correct at the node level", {
     sum <- stats[["sum"]];
     count <- stats[["count"]];
 
-    expect_equal(min, 1.086186, tolerance = 1e-6);
-    expect_equal(q1, 1.63289,  tolerance = 1e-6);
-    expect_equal(median, 2.09308,  tolerance = 1e-6);
-    expect_equal(q3, 2.366687,  tolerance = 1e-6);
-    expect_equal(max, 4.310297,  tolerance = 1e-6);
-    expect_equal(std, 0.7185645,  tolerance = 1e-6);
-    expect_equal(sum, 42.15734,  tolerance = 1e-6);
+    expect_equal(min,    1.086186,  tolerance = 1e-6);
+    expect_equal(q1,     1.63289,   tolerance = 1e-6);
+    expect_equal(median, 2.09308,   tolerance = 1e-6);
+    expect_equal(q3,     2.366687,  tolerance = 1e-6);
+    expect_equal(max,    4.310297,  tolerance = 1e-6);
+    expect_equal(std,    0.7185645, tolerance = 1e-6);
+    expect_equal(sum,    42.15734,  tolerance = 1e-6);
     expect_equal(count, N);
 })
 
@@ -48,13 +48,13 @@ test_that("Summary statistics are correct at the node level, using another distr
     sum <- stats[["sum"]];
     count <- stats[["count"]];
 
-    expect_equal(min, 3.489711, tolerance = 1e-6);
-    expect_equal(q1, 3.964479,  tolerance = 1e-6);
+    expect_equal(min,    3.489711,  tolerance = 1e-6);
+    expect_equal(q1,     3.964479,  tolerance = 1e-6);
     expect_equal(median, 4.063227,  tolerance = 1e-6);
-    expect_equal(q3, 4.190516,  tolerance = 1e-6);
-    expect_equal(max, 4.310297,  tolerance = 1e-6);
-    expect_equal(std, 0.3125887,  tolerance = 1e-6);
-    expect_equal(sum, 40.75867,  tolerance = 1e-6);
+    expect_equal(q3,     4.190516,  tolerance = 1e-6);
+    expect_equal(max,    4.709936,  tolerance = 1e-6);
+    expect_equal(std,    0.3125887, tolerance = 1e-6);
+    expect_equal(sum,    40.75867,  tolerance = 1e-6);
     expect_equal(count, N);
 
 })

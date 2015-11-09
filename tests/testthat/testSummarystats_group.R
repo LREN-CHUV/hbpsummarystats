@@ -1,6 +1,6 @@
-context("Federation")
+context("Federation");
 
-library(hbpsummarystats)
+library(hbpsummarystats);
 
 test_that("Summary statistics are correct at the federation level", {
 

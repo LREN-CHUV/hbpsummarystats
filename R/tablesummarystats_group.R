@@ -1,5 +1,5 @@
 
-#' Computes the statitics used to display the summaryplot for a vector of values.
+#' Computes the statistics used to display the summaryplot for a vector of values.
 #'
 #' @param listStats the results of tablesummarystat function applied to multiple datasets and packed in one list.
 #' @return min : Minimum value in the vector

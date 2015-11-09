@@ -1,5 +1,5 @@
 
-# hbpboxstat R package
+# hbpsummarystat R package
 
 This package provides simple statistics to draw a boxplot over a dataset.
 
