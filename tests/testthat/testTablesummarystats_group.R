@@ -49,3 +49,41 @@ test_that("Table summary statistics are correct at the federation level", {
     expect_equal(stats[['count','b']],  40);
 
 })
+
+test_that("Table summary statistics are correct at the federation level with one row stats", {
+
+    N <- 20;
+    set.seed(100);
+    rowA1 <- rnorm(N,mean=2,sd=1);
+    set.seed(200);
+    rowB1 <- rnorm(N,mean=4,sd=0.7);
+
+    y1 <- data.frame(id=1:20, a=rowA1, b=rowB1);
+
+    stats1 <- tablesummarystats(y1, c("a"));
+
+    set.seed(100);
+    rowA2 <- rnorm(N,mean=3,sd=0.8);
+    set.seed(200);
+    rowB2 <- rnorm(N,mean=4,sd=1.2);
+
+    y2 <- data.frame(id=1:20, a=rowA2, b=rowB2);
+
+    stats2 <- tablesummarystats(y2, c("a"));
+
+    intermediateStats <- list(stats1,stats2);
+
+    stats <- tablesummarystats_group(intermediateStats);
+
+    expect_equal(stats[['min','a']],    1.086186,  tolerance = 1e-6);
+    # TODO: quartiles are far from good enough
+    #expect_equal(stats[['q1','a']],     2.169601,  tolerance = 1e-6);
+    #expect_equal(stats[['median','a']], 2.583772,  tolerance = 1e-6);
+    #expect_equal(stats[['q3','a']],     2.830018,  tolerance = 1e-6);
+    expect_equal(stats[['max','a']],    4.848237,  tolerance = 1e-6);
+    expect_equal(stats[['mean','a']],   2.59708,   tolerance = 1e-6);
+    expect_equal(stats[['std','a']],    0.8140788, tolerance = 1e-6);
+    expect_equal(stats[['sum','a']],    103.8832,  tolerance = 1e-6);
+    expect_equal(stats[['count','a']],  40);
+
+})
