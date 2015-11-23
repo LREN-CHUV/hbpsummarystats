@@ -20,6 +20,10 @@ tablesummarystats_group <- function(listStats) {
 
 	for (g in groups) {
 		ext <- sapply(listStats, function(df) df[,g]);
+		rn <- rownames(ext)
+		if (is.null(rn)) {
+		    rownames(ext) <- c("min", "q1", "median", "q3", "max", "mean", "std", "sum", "count");
+	    }
 		regrouped <- cbind(regrouped, summarystats_group(ext));
 	}
 
