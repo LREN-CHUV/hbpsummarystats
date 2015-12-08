@@ -1,4 +1,4 @@
-library(testthat)
-library(hbpsummarystats)
+library(testthat);
+library(hbpsummarystats);
 
-test_check("hbpsummarystats")
+test_check("hbpsummarystats");
