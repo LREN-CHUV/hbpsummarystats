@@ -15,6 +15,9 @@ echo
 echo "lintr::lint_package()"
 echo "  Checks the style of the source code"
 echo
+echo "devtools::load_all()"
+echo "  Load the code in the current project"
+echo
 echo "devtools::document()"
 echo "  Generates the documentation"
 echo
