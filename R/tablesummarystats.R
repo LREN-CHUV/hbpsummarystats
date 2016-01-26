@@ -13,6 +13,9 @@ tablesummarystats <- function(ytable, ycols2plot) {
   # Lausanne, September 22nd, 2015
 
   yvarnames <- colnames(ytable);
+  # The list of columns is sometimes wrongly wrapped into a list
+  # following a call to strsplit for example
+  ycols2plot <- unlist(ycols2plot);
   inds <- which(yvarnames %in% ycols2plot);
   ysubset <- ytable[,inds];
   if (length(ycols2plot) == 1) {
