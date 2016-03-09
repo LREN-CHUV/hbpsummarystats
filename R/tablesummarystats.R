@@ -17,6 +17,7 @@ tablesummarystats <- function(data, columns) {
   # following a call to strsplit for example
   columns <- unlist(columns);
   ysubset <- as.data.frame(data[ , which(yvarnames %in% columns)]);
+  colnames(ysubset) <- yvarnames[which(yvarnames %in% columns)];
   fstats <- sapply(ysubset, summarystats);
 
   return(fstats)
