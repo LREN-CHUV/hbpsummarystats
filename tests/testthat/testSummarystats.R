@@ -1,5 +1,6 @@
 context("Node");
 
+library(testthat);
 library(hbpsummarystats);
 
 test_that("Summary statistics are correct at the node level", {
@@ -11,6 +12,7 @@ test_that("Summary statistics are correct at the node level", {
 
     stats <- summarystats(y);
 
+    type <- stats[["type"]];
     min <- stats[["min"]];
     q1 <- stats[["q1"]];
     median <- stats[["median"]];
@@ -20,6 +22,7 @@ test_that("Summary statistics are correct at the node level", {
     sum <- stats[["sum"]];
     count <- stats[["count"]];
 
+    expect_equal(type,   "numeric");
     expect_equal(min,    1.086186,  tolerance = 1e-6);
     expect_equal(q1,     1.63289,   tolerance = 1e-6);
     expect_equal(median, 2.09308,   tolerance = 1e-6);
@@ -39,6 +42,7 @@ test_that("Summary statistics are correct at the node level, using another distr
 
     stats <- summarystats(y);
 
+    type <- stats[["type"]];
     min <- stats[["min"]];
     q1 <- stats[["q1"]];
     median <- stats[["median"]];
@@ -48,6 +52,7 @@ test_that("Summary statistics are correct at the node level, using another distr
     sum <- stats[["sum"]];
     count <- stats[["count"]];
 
+    expect_equal(type,   "numeric");
     expect_equal(min,    3.489711,  tolerance = 1e-6);
     expect_equal(q1,     3.964479,  tolerance = 1e-6);
     expect_equal(median, 4.063227,  tolerance = 1e-6);
@@ -56,5 +61,43 @@ test_that("Summary statistics are correct at the node level, using another distr
     expect_equal(std,    0.3125887, tolerance = 1e-6);
     expect_equal(sum,    40.75867,  tolerance = 1e-6);
     expect_equal(count, N);
+
+})
+
+test_that("Summary statistics are correct at the node level, using integers", {
+
+    y <- as.integer(c(8, 9, 7, 5, 4, -1));
+    N <- 6;
+
+    stats <- summarystats(y);
+
+    type <- stats[["type"]];
+    min <- stats[["min"]];
+    max <- stats[["max"]];
+    sum <- stats[["sum"]];
+    count <- stats[["count"]];
+
+    expect_equal(type,  "integer");
+    expect_equal(min,   -1);
+    expect_equal(max,   9);
+    expect_equal(sum,   32);
+    expect_equal(count, N);
+
+})
+
+test_that("Summary statistics are correct at the node level, using string factors", {
+
+    y <- c("a", "b", "c", "a", "a", "b");
+    N <- 6;
+
+    stats <- summarystats(y);
+
+    type <- stats[["type"]];
+    count <- stats[["count"]];
+    factors <- stats[["factors"]];
+
+    expect_equal(type,   "character");
+    expect_equal(count, N);
+    expect_equal(factors, c("a", "b", "c"));
 
 })

@@ -38,7 +38,15 @@ summarystats_group <- function(partialStats) {
     q1 <- mean(unlist(tStats$q1));
     q3 <- mean(unlist(tStats$q3));
 
-    rout <- list(min=tmin, q1=q1, median=tmedian, q3=q3, max=tmax, mean=tmean, std=tstd, sum=tsum, count=tcount);
+    rout <- list(min=tmin,
+                 q1=q1,
+                 median=tmedian,
+                 q3=q3,
+                 max=tmax,
+                 mean=tmean,
+                 std=tstd,
+                 sum=tsum,
+                 count=tcount);
 
     return(rout)
 }

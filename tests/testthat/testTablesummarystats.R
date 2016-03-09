@@ -10,9 +10,9 @@ test_that("Table summary statistics are correct at the node level", {
     set.seed(200);
     rowB <- rnorm(N,mean=4,sd=0.7);
 
-    y <- data.frame(id=1:20, a=rowA, b=rowB);
+    data <- data.frame(id=1:20, a=rowA, b=rowB);
 
-    stats <- tablesummarystats(y, c("a", "b"));
+    stats <- tablesummarystats(data, c("a", "b"));
 
     expect_equal(stats[['min','a']],    1.086186,  tolerance = 1e-6);
     expect_equal(stats[['q1','a']],     1.63289,   tolerance = 1e-6);
@@ -33,5 +33,37 @@ test_that("Table summary statistics are correct at the node level", {
     expect_equal(stats[['std','b']],    0.5498117, tolerance = 1e-6);
     expect_equal(stats[['sum','b']],    79.0654,   tolerance = 1e-6);
     expect_equal(stats[['count','b']], N);
+
+})
+
+test_that("Table summary statistics are correct with mixed data", {
+
+    N <- 20;
+    set.seed(100);
+    rowA <- rnorm(N,mean=2,sd=1);
+    set.seed(200);
+    rowB <- sample( LETTERS[1:4], 20, replace=TRUE, prob=c(0.1, 0.2, 0.65, 0.05) );
+
+    data <- data.frame(id=1:20, a=rowA, b=rowB);
+
+    stats <- tablesummarystats(data, c("id", "a", "b"));
+
+    expect_equal(stats[['min','id']],    1);
+    expect_equal(stats[['max','id']],    20);
+    expect_equal(stats[['sum','id']],    210);
+    expect_equal(stats[['count','id']], N);
+
+    expect_equal(stats[['min','a']],    1.086186,  tolerance = 1e-6);
+    expect_equal(stats[['q1','a']],     1.63289,   tolerance = 1e-6);
+    expect_equal(stats[['median','a']], 2.09308,   tolerance = 1e-6);
+    expect_equal(stats[['q3','a']],     2.366687,  tolerance = 1e-6);
+    expect_equal(stats[['max','a']],    4.310297,  tolerance = 1e-6);
+    expect_equal(stats[['mean','a']],   2.107867,  tolerance = 1e-6);
+    expect_equal(stats[['std','a']],    0.7185645, tolerance = 1e-6);
+    expect_equal(stats[['sum','a']],    42.15734,  tolerance = 1e-6);
+    expect_equal(stats[['count','a']],  N);
+
+    expect_equal(stats[['count','b']], N);
+    expect_equal(stats[['factors','b']], c('A','B','C'));
 
 })

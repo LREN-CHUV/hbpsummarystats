@@ -1,15 +1,16 @@
 Package: hbpsummarystats
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Title: Descriptive Summary Statistics
+Version: 0.5
 Authors@R: person("Lester", "Melie-Garcia", email = "Lester.Melie-Garcia@chuv.ch", role = c("aut", "cre"))
 Author: Lester Melie-Garcia [aut, cre]
 Maintainer: Ludovic Claude <Ludovic.Claude@chuv.ch>
-Description: What the package does (one paragraph).
+Description: Provides descrictive statistics for vectors or datasets. Also
+    provides an experimental method of combining the descriptive statistics coming
+    from two different datasets but with the same structure.
 Depends:
     R (>= 3.2.1)
-Imports:
 License: MIT
 LazyData: true
 Suggests:
     testthat
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1

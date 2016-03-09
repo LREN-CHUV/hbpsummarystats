@@ -5,12 +5,12 @@
 \title{Computes the minimum, maximum, media, quantiles and other parameters to be used for plotting.
 Only those variables that are numeric will be return with the previous statistics.}
 \usage{
-tablesummarystats(ytable, ycols2plot)
+tablesummarystats(data, columns)
 }
 \arguments{
-\item{ytable}{Data table type data.frame.}
+\item{data}{Data table type data.frame.}
 
-\item{ycols2plot}{Names of the variables in the Table that will be plotted.}
+\item{columns}{Names of the variables in the Table that will be plotted.}
 }
 \value{
 fstats : Statistic necessary for plotting: minimum, maximum, media, quantiles. This is data.frame type.
